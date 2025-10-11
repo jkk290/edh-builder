@@ -1,0 +1,7 @@
+[project]
+name = "edh-builder"
+version = "0.1.0"
+description = "A CLI app to help build EDH decks"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
