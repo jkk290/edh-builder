@@ -1,4 +1,4 @@
-def builder_mode(deck_name, deck_commander):
+def builder_mode(deck_name, deck_commander=None):
     print("==================")
     print("=  Builder Mode  =")
     print("==================")
