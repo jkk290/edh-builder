@@ -20,6 +20,8 @@ def edhbuilder():
                 edit_deck()
             case "3":
                 deck_list = get_decks()
+                if deck_list is None:
+                    continue
                 for deck in deck_list:
                     print(deck)
             case _:

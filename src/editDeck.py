@@ -8,7 +8,7 @@ def edit_deck():
         for i in range(len(deck_list)):
             print(f"{i+1}. {deck_list[i]}")
         print("=====================\n")
-        deck_selection = input(f"Select a deck 1-{len(deck_list)} (q to quit): ")
+        deck_selection = input(f"Select a deck 1-{len(deck_list)} (q to quit back to menu): ")
         if deck_selection == "q":
             return
         try:
