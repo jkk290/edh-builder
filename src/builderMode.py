@@ -32,8 +32,18 @@ def builder_mode(deck_name):
                 has_qty = re.search("[-][0123456789]+$", splitted_input[1])
                 if has_qty:
                     final_input = splitted_input[1].split(" -")
-                    deck_content[final_input[0]] = final_input[1]
+                    deck_content[final_input[0]] = int(final_input[1])
                 else:
                     deck_content[splitted_input[1]] = 1
-                
-        
+            case s if s.startswith("delete "):
+                splitted_input = builder_input.split(" ", 1)
+                has_qty = re.search("[-][0123456789]+$", splitted_input[1])
+                if has_qty:
+                    final_input = splitted_input[1].split(" -")
+                    qty = int(final_input[1])
+                    if deck_content[final_input[0]] - qty > 0:
+                        deck_content[final_input[0]] -= qty
+                    else:
+                        del deck_content[final_input[0]]
+                else:
+                    del deck_content[splitted_input[1]]      
