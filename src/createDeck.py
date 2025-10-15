@@ -1,5 +1,5 @@
 from .builderMode import builder_mode
-from .utils.deckHelper import create_deck_file
+from .utils.deckHelper import create_deck_file, write_deck_file
 
 def create_deck():
     deck_name = ""
@@ -16,5 +16,7 @@ def create_deck():
             return
         elif deck_commander == "":
             print("Deck must have a commander")
+    formatted_commander = f"{deck_commander},commander\n"
     create_deck_file(deck_name)
-    builder_mode(deck_name, deck_commander)
+    write_deck_file(deck_name, formatted_commander)
+    builder_mode(deck_name)

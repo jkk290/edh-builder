@@ -10,7 +10,7 @@ def edhbuilder():
         print("\n=============================")
         print("1. Start building a new deck\n2. Edit an existing deck\n3. View all decks")
         print("=============================\n")
-        menu_selection = input("Select from the menu 1-3 (q to quit): ")
+        menu_selection = input("Select from the menu, enter 1-3 (q to quit): ")
         match menu_selection:        
             case "q":
                 break

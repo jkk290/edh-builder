@@ -20,6 +20,22 @@ def get_decks():
             deck_list.append(deck_name)
     return deck_list
 
+def get_deck_content(deck_name):
+    decks_path = get_decks_dir()
+    file_name = f"{deck_name}.csv"
+    deck_full_path = os.path.join(decks_path, file_name)
+    with open(deck_full_path, "r") as f:
+        file_content_string = f.read()
+    deck_list = file_content_string.split("\n")
+    if deck_list != None:
+        deck_content = {}
+        for line in deck_list:
+            if line == "":
+                continue
+            info = line.split(",")
+            deck_content[info[0]] = info[1]
+        return deck_content
+
 def create_deck_file(deck_name):
     decks_path = get_decks_dir()
 
@@ -28,3 +44,14 @@ def create_deck_file(deck_name):
     with open(full_path, "w") as f:
         pass
     print(f"{deck_name}.csv successfully created")
+
+def write_deck_file(deck_name, deck_content):
+    decks_path = get_decks_dir()
+    file_name = f"{deck_name}.csv"
+    deck_full_path = os.path.join(decks_path, file_name)
+    try:
+        with open(deck_full_path, "w") as f:
+            f.write(deck_content)
+        return True
+    except Exception:
+        return False
