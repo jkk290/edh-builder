@@ -56,4 +56,13 @@ def write_deck_file(deck_name, deck_content):
         with open(deck_full_path, "w") as f:
             f.write(content_string)
     except Exception:
-        print(f"Failed trying to save to file {deck_name}.csv")
+        print(f"Failed trying to save to file {file_name}")
+
+def delete_deck_file(deck_name):
+    decks_path = get_decks_dir()
+    file_name = f"{deck_name}.csv"
+    deck_full_path = os.path.join(decks_path, file_name)
+    try:
+        os.remove(deck_full_path)
+    except Exception:
+        print(f"Failed trying to delete file {file_name}")

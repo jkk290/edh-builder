@@ -1,5 +1,6 @@
 from .createDeck import create_deck
 from .editDeck import edit_deck
+from .deleteDeck import delete_deck
 from .utils.deckHelper import get_decks
 
 def edhbuilder():
@@ -8,9 +9,9 @@ def edhbuilder():
     print("++++++++++++++++++++++")
     while (True):
         print("\n=============================")
-        print("1. Start building a new deck\n2. Edit an existing deck\n3. View all decks")
+        print("1. Start building a new deck\n2. Edit an existing deck\n3. Delete an existing deck\n4. View all decks")
         print("=============================\n")
-        menu_selection = input("Select from the menu, enter 1-3 (q to quit): ")
+        menu_selection = input("Select from the menu, enter 1-4 (q to quit): ")
         match menu_selection:        
             case "q":
                 break
@@ -19,6 +20,8 @@ def edhbuilder():
             case "2":
                 edit_deck()
             case "3":
+                delete_deck()
+            case "4":
                 deck_list = get_decks()
                 if deck_list is None:
                     continue
