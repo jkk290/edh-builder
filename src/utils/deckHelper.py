@@ -49,9 +49,11 @@ def write_deck_file(deck_name, deck_content):
     decks_path = get_decks_dir()
     file_name = f"{deck_name}.csv"
     deck_full_path = os.path.join(decks_path, file_name)
+    content_string = ""
+    for card in deck_content:
+        content_string += f"{card},{deck_content[card]}\n"
     try:
         with open(deck_full_path, "w") as f:
-            f.write(deck_content)
-        return True
+            f.write(content_string)
     except Exception:
-        return False
+        print(f"Failed trying to save to file {deck_name}.csv")

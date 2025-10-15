@@ -1,5 +1,5 @@
 import re
-from .utils.deckHelper import get_deck_content
+from .utils.deckHelper import get_deck_content, write_deck_file
 
 def print_deck_content(deck_content):
     print("Current deck list")
@@ -24,6 +24,15 @@ def builder_mode(deck_name):
         builder_input = input("(builder)> ")
         match builder_input:
             case "q":
+                quit_input = ""
+                while quit_input.lower() != "y" and quit_input.lower() != "n":                    
+                    quit_input = input("Save current deck list to file? (y/n): ")
+                    if quit_input != "y" and quit_input != "n":
+                        print("Invalid response, please enter y or n")
+
+                if quit_input.lower() == "y":
+                    print(f"Saving deck to file {deck_name}.csv")
+                    write_deck_file(deck_name, deck_content)
                 return
             case "show deck":
                 print_deck_content(deck_content)
@@ -46,4 +55,7 @@ def builder_mode(deck_name):
                     else:
                         del deck_content[final_input[0]]
                 else:
-                    del deck_content[splitted_input[1]]      
+                    del deck_content[splitted_input[1]]
+            case "save deck":
+                print(f"Saving deck to file {deck_name}.csv")
+                write_deck_file(deck_name, deck_content)
