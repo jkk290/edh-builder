@@ -1,5 +1,6 @@
 import re
 from .utils.deckHelper import get_deck_content, write_deck_file
+from .utils.manual import manual
 
 def print_deck_content(deck_content):
     print("Current deck list")
@@ -59,3 +60,7 @@ def builder_mode(deck_name):
             case "save deck":
                 print(f"Saving deck to file {deck_name}.csv")
                 write_deck_file(deck_name, deck_content)
+            case "man":
+                print(manual())
+            case _:
+                print("Invalid syntax, enter \"man\" to view the manual ")
