@@ -45,9 +45,21 @@ def builder_mode(deck_name):
                 has_qty = re.search("[-][0123456789]+$", splitted_input[1])
                 if has_qty:
                     final_input = splitted_input[1].split(" -")
-                    deck_content.append({"card_name": final_input[0], "type": "", "qty": int(final_input[1])})
+                    for card in deck_content:
+                        if card["card_name"].lower() == final_input[0].lower():
+                            card_qty = int(card["qty"])
+                            card["qty"] = card_qty + int(final_input[1])
+                            break
+                    else: 
+                        deck_content.append({"card_name": final_input[0], "type": "", "qty": int(final_input[1])})
                 else:
-                    deck_content.append({"card_name": splitted_input[1], "type": "", "qty": 1})
+                    for card in deck_content:
+                        if card["card_name"].lower() == splitted_input[1].lower():
+                            card_qty = int(card["qty"])
+                            card["qty"] = card_qty + 1
+                            break
+                    else:
+                        deck_content.append({"card_name": splitted_input[1], "type": "", "qty": 1})
             case s if s.startswith("delete "):
                 splitted_input = builder_input.split(" ", 1)
                 has_qty = re.search("[-][0123456789]+$", splitted_input[1])
@@ -69,6 +81,16 @@ def builder_mode(deck_name):
                             break
                     else:
                         print(f"{splitted_input[1]} not found in deck list")
+            case "validate deck":
+                print("\nChecking if commander + deck list is 100 cards...")
+                card_count = 0
+                for card in deck_content:
+                    if card["type"] == "commander" or card["type"] == "":
+                        card_count += int(card["qty"])
+                if card_count == 100:
+                    print("Deck count is valid")
+                else:
+                    print(f"Deck count is not valid, current card count(commander included): {card_count}")
             case "save deck":
                 print(f"Saving deck to file {deck_name}.csv")
                 write_deck_file(deck_name, deck_content)
