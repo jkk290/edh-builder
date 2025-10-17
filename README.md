@@ -19,8 +19,20 @@ Example:
 `delete Cyclonic Rift` (Removes Cyclonic Rift from deck list)  
 `delete Island -5` (Removes 5 copies of Island from deck list)  
 
+`update background <card name>`  
+Updates the current background with the new card name. Adds a background if none in deck  
+
+`update partner <card name>`  
+Updates the current partner with the new card name. Adds a partner if none in deck  
+
+`update companion <card name>`  
+Updates the current companion with the new card name. Adds a companion if none in deck
+
 `show deck`  
 Prints the current desk list  
+
+`validate deck`
+Checks if deck commander and rest of the cards equal 100. Does not count partner, background, and companion  
 
 `save deck`  
 Writes the current deck list to the deck file as a csv. CSV format is cardname, type, qty.  

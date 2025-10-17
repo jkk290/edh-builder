@@ -81,6 +81,30 @@ def builder_mode(deck_name):
                             break
                     else:
                         print(f"{splitted_input[1]} not found in deck list")
+            case s if s.startswith("update background "):
+                splitted_input = builder_input.split(" ", 2)
+                for card in deck_content:
+                    if card["type"] == "background":
+                        card["card_name"] = splitted_input[2]
+                        break
+                else:
+                    deck_content.append({"card_name": splitted_input[2], "type": "background", "qty": 1})
+            case s if s.startswith("update partner "):
+                splitted_input = builder_input.split(" ", 2)
+                for card in deck_content:
+                    if card["type"] == "partner":
+                        card["card_name"] = splitted_input[2]
+                        break
+                else:
+                    deck_content.append({"card_name": splitted_input[2], "type": "partner", "qty": 1})
+            case s if s.startswith("update companion "):
+                splitted_input = builder_input.split(" ", 2)
+                for card in deck_content:
+                    if card["type"] == "companion":
+                        card["card_name"] = splitted_input[2]
+                        break
+                else:
+                    deck_content.append({"card_name": splitted_input[2], "type": "companion", "qty": 1})
             case "validate deck":
                 print("\nChecking if commander + deck list is 100 cards...")
                 card_count = 0
