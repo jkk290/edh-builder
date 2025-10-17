@@ -16,7 +16,7 @@ def create_deck():
             return
         elif deck_commander == "":
             print("Deck must have a commander")
-    formatted_commander = {deck_commander: "commander"}
+    formatted_commander = [{"card_name": deck_commander, "type": "commander", "qty": 1}]
     create_deck_file(deck_name)
     write_deck_file(deck_name, formatted_commander)
     builder_mode(deck_name)

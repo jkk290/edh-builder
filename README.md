@@ -23,8 +23,8 @@ Example:
 Prints the current desk list  
 
 `save deck`  
-Writes the current deck list to the deck file as a csv. CSV format is cardname, type/qty.  
+Writes the current deck list to the deck file as a csv. CSV format is cardname, type, qty.  
 Example:  
-"Yuriko, The Tiger's Shadow",commander  
-Cyclonic Rift,1  
-Island,15  
+"Yuriko, The Tiger's Shadow",commander,1  
+Cyclonic Rift,,1  
+Island,,15  

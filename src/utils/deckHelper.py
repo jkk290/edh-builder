@@ -1,4 +1,5 @@
 import os
+import csv
 
 def get_decks_dir():
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -24,17 +25,12 @@ def get_deck_content(deck_name):
     decks_path = get_decks_dir()
     file_name = f"{deck_name}.csv"
     deck_full_path = os.path.join(decks_path, file_name)
-    with open(deck_full_path, "r") as f:
-        file_content_string = f.read()
-    deck_list = file_content_string.split("\n")
-    if deck_list != None:
-        deck_content = {}
-        for line in deck_list:
-            if line == "":
-                continue
-            info = line.split(",")
-            deck_content[info[0]] = info[1]
-        return deck_content
+    deck_content = []
+    with open(deck_full_path, "r") as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            deck_content.append(row)
+    return deck_content
 
 def create_deck_file(deck_name):
     decks_path = get_decks_dir()
@@ -49,14 +45,11 @@ def write_deck_file(deck_name, deck_content):
     decks_path = get_decks_dir()
     file_name = f"{deck_name}.csv"
     deck_full_path = os.path.join(decks_path, file_name)
-    content_string = ""
-    for card in deck_content:
-        content_string += f"{card},{deck_content[card]}\n"
-    try:
-        with open(deck_full_path, "w") as f:
-            f.write(content_string)
-    except Exception:
-        print(f"Failed trying to save to file {file_name}")
+    fields = ["card_name", "type", "qty"]
+    with open(deck_full_path, "w") as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(deck_content)
 
 def delete_deck_file(deck_name):
     decks_path = get_decks_dir()

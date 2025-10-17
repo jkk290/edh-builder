@@ -5,8 +5,11 @@ from .utils.manual import manual
 def print_deck_content(deck_content):
     print("Current deck list")
     print("+++++++++++++++++\n")
-    for line in deck_content:
-        print(f"{line} - {deck_content[line]}")
+    for card in deck_content:
+        if card["type"] != "":
+            print(f"{card["card_name"]} - {card["type"]} - x{card["qty"]}")
+        else:
+            print(f"{card["card_name"]} - x{card["qty"]}")
     print("====================\n")
 
 def builder_mode(deck_name):
@@ -42,21 +45,30 @@ def builder_mode(deck_name):
                 has_qty = re.search("[-][0123456789]+$", splitted_input[1])
                 if has_qty:
                     final_input = splitted_input[1].split(" -")
-                    deck_content[final_input[0]] = int(final_input[1])
+                    deck_content.append({"card_name": final_input[0], "type": "", "qty": int(final_input[1])})
                 else:
-                    deck_content[splitted_input[1]] = 1
+                    deck_content.append({"card_name": splitted_input[1], "type": "", "qty": 1})
             case s if s.startswith("delete "):
                 splitted_input = builder_input.split(" ", 1)
                 has_qty = re.search("[-][0123456789]+$", splitted_input[1])
                 if has_qty:
                     final_input = splitted_input[1].split(" -")
-                    qty = int(final_input[1])
-                    if deck_content[final_input[0]] - qty > 0:
-                        deck_content[final_input[0]] -= qty
+                    for card in deck_content:
+                        if card["card_name"].lower() == final_input[0].lower():
+                            card_qty = int(card["qty"])
+                            card["qty"] = card_qty - int(final_input[1])
+                            if card["qty"] <= 0:
+                                deck_content.remove(card)
+                            break
                     else:
-                        del deck_content[final_input[0]]
+                        print(f"{final_input[0]} not found in deck list")
                 else:
-                    del deck_content[splitted_input[1]]
+                    for card in deck_content:
+                        if card["card_name"].lower() == splitted_input[1].lower():
+                            deck_content.remove(card)
+                            break
+                    else:
+                        print(f"{splitted_input[1]} not found in deck list")
             case "save deck":
                 print(f"Saving deck to file {deck_name}.csv")
                 write_deck_file(deck_name, deck_content)
