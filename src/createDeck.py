@@ -21,7 +21,7 @@ def create_deck():
     deck_partner = None
     while background_or_partner:
         print("Will your deck have a background or partner?\n1. Background\n2. Partner\n3. None")
-        response = input("Please enter 1-3 (q to quit back to menu) ")
+        response = input("Please enter 1-3 (q to quit back to menu): ")
         match response:
             case "1":
                 deck_background = input("Enter the background card name: ")
@@ -33,7 +33,13 @@ def create_deck():
                 background_or_partner = False
             case _:
                 print("Invalid selection")
+    deck_companion = input("Enter card name if deck has a companion. Otherwise, enter \"n\" or leave blank (q to quit back to menu): ")
+    if deck_companion == "q":
+        return
+
     deck_content = [{"card_name": deck_commander, "type": "commander", "qty": 1}]
+    if deck_companion != "n" and deck_companion != "":
+        deck_content.append({"card_name": deck_companion, "type": "companion", "qty": 1})
     if background_or_partner and deck_background:
         deck_content.append({"card_name": deck_background, "type": "background", "qty": 1})
     elif background_or_partner and deck_partner:
