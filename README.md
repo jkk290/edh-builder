@@ -6,7 +6,7 @@ A Python CLI app for building and managing Magic The Gathering EDH/Commander dec
 Utilizes uv for Python virtual environment [uv install](https://docs.astral.sh/uv/getting-started/installation/)  
 Clone repository  
 `cd edh-builder`  
-`uv venv`
+`uv venv`  
 `source .venv/bin/activate`  
 `uv run main.py`
 
